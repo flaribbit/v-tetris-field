@@ -1,12 +1,6 @@
 <template>
   <div>
-    <table>
-      <tbody>
-        <tr v-for="row in field">
-          <td v-for="cell in row" :class="['block', cell]"></td>
-        </tr>
-      </tbody>
-    </table>
+    <canvas ref="canvas" />
   </div>
   <div>
     <button v-for="page, i in pages" @click="selectpage = i">{{ i }}</button>
@@ -14,8 +8,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
+import { ref, watch, onMounted } from "vue"
 import { decoder } from "tetris-fumen"
+// color constants
 const colors = {
   "T": ["#b451ac", "#e56add"],
   "I": ["#41afde", "#43d3ff"],
@@ -28,18 +23,35 @@ const colors = {
 const props = defineProps({
   fumen: { type: String, default: "v115@vhAAgH" },
 })
+// variables
+var ctx = null
+const canvas = ref(null)
 const pages = ref(decoder.decode(props.fumen));
 const selectpage = ref(0)
-const field = computed(() => {
-  var field = pages.value[selectpage.value].field
-  var ret = []
+// draw game field
+const drawField = () => {
+  const field = pages.value[selectpage.value].field
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
   for (var i = 0; i < 20; i++) {
-    var line = []
     for (var j = 0; j < 10; j++) {
-      line.push(field.at(j, 19 - i))
+      var piece = field.at(j, i)
+      if (piece != "_") {
+        ctx.fillStyle = colors[piece][0]
+        ctx.fillRect(j * 20, (19 - i) * 20, 20, 20)
+        ctx.fillStyle = colors[piece][1]
+        ctx.fillRect(j * 20, (19 - i) * 20, 20, -4)
+      }
     }
-    ret.push(line)
   }
-  return ret
+}
+onMounted(() => {
+  canvas.value.width = 10 * 20
+  canvas.value.height = 20 * 20
+  canvas.value.style = "image-rendering: pixelated"
+  ctx = canvas.value.getContext("2d")
+  drawField()
+})
+watch(selectpage, () => {
+  drawField()
 })
 </script>
