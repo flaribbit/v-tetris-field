@@ -16,6 +16,15 @@
 <script setup>
 import { ref, computed } from "vue"
 import { decoder } from "tetris-fumen"
+const colors = {
+  "T": ["#b451ac", "#e56add"],
+  "I": ["#41afde", "#43d3ff"],
+  "O": ["#f7d33e", "#fff952"],
+  "L": ["#ef9535", "#ffbf60"],
+  "J": ["#1983bf", "#1ba6f9"],
+  "S": ["#66c65c", "#88ee86"],
+  "Z": ["#ef624d", "#ff9484"],
+}
 const props = defineProps({
   fumen: { type: String, default: "v115@vhAAgH" },
 })
@@ -34,32 +43,3 @@ const field = computed(() => {
   return ret
 })
 </script>
-
-<style scoped>
-.block {
-  width: 10px;
-  height: 10px;
-  border: 1px solid black;
-}
-.block.T {
-  background-color: #f00;
-}
-.block.I {
-  background-color: #00f;
-}
-.block.O {
-  background-color: #0f0;
-}
-.block.L {
-  background-color: #f0f;
-}
-.block.J {
-  background-color: #ff0;
-}
-.block.S {
-  background-color: #0ff;
-}
-.block.Z {
-  background-color: #f0f;
-}
-</style>
