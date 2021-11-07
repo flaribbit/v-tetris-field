@@ -1,9 +1,14 @@
 {
+  "scripts": {
+    "dev": "vite ./test",
+    "build": "vite build"
+  },
   "dependencies": {
-    "@vitejs/plugin-vue": "^1.9.4",
-    "tetris-fumen": "^1.1.1"
+    "tetris-fumen": "^1.1.1",
+    "vue": "^3.2.21"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.4",
     "vite": "^2.6.13"
   }
 }

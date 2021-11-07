@@ -2,6 +2,6 @@
   <VTetrisField />
 </template>
 
-<script>
-import VTetrisField from './VTetrisField.vue'
+<script setup>
+import VTetrisField from '../src/VTetrisField.vue'
 </script>
