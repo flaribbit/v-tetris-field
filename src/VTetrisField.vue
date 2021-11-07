@@ -31,7 +31,6 @@ const selectpage = ref(0)
 // draw game field
 const drawField = () => {
   const field = pages.value[selectpage.value].field
-  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
   for (var i = 0; i < 20; i++) {
     for (var j = 0; j < 10; j++) {
       var piece = field.at(j, i)
@@ -52,6 +51,7 @@ onMounted(() => {
   drawField()
 })
 watch(selectpage, () => {
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
   drawField()
 })
 </script>
