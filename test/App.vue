@@ -1,5 +1,5 @@
 <template>
-  <VTetrisField />
+  <VTetrisField fumen="v115@vhGRQYHAvItJEJmhCAUGJKJJvMJTNJGBJFKYPAUEzP?EJG98AQmqhECDdCA" />
 </template>
 
 <script setup>
