@@ -21,6 +21,7 @@ const colors = {
   "J": ["#1983bf", "#1ba6f9"],
   "S": ["#66c65c", "#88ee86"],
   "Z": ["#ef624d", "#ff9484"],
+  "X": ["#686868", "#949494"],
 }
 const props = defineProps({
   fumen: { type: String, default: "v115@vhAAgH" },
@@ -38,6 +39,7 @@ const setPage = (p) => {
 // draw game field
 const drawField = () => {
   const field = pages.value[page.value].field
+  const mino = pages.value[page.value].mino()
   for (var i = 0; i < 20; i++) {
     for (var j = 0; j < 10; j++) {
       var piece = field.at(j, i)
@@ -47,6 +49,15 @@ const drawField = () => {
         ctx.fillStyle = colors[piece][1]
         ctx.fillRect(j * 20, (19 - i) * 20, 20, -4)
       }
+    }
+  }
+  const pos = mino.positions()
+  for (var i = 0; i < 4; i++) {
+    ctx.fillStyle = colors[mino.type][0] + "7f"
+    ctx.fillRect(pos[i].x * 20, (19 - pos[i].y) * 20, 20, 20)
+    if (!pos.find(p => p.x == pos[i].x && p.y == pos[i].y + 1) && field.at(pos[i].x, pos[i].y + 1) == "_") {
+      ctx.fillStyle = colors[mino.type][1] + "7f"
+      ctx.fillRect(pos[i].x * 20, (19 - pos[i].y) * 20, 20, -4)
     }
   }
 }
