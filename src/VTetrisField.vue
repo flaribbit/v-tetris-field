@@ -3,7 +3,9 @@
     <canvas ref="canvas" />
   </div>
   <div class="pages">
-    <button v-for="_, i in pages" @click="page = i">{{ i }}</button>
+    <button @click="setPage(page - 1)">上一页</button>
+    <button @click="setPage(page + 1)">下一页</button>
+    {{ page }}
   </div>
 </template>
 
@@ -29,6 +31,10 @@ var ctx = null
 const canvas = ref(null)
 const pages = ref(decoder.decode(props.fumen));
 const page = ref(props.page);
+const setPage = (p) => {
+  if (p < 0 || p >= pages.value.length) return;
+  page.value = p;
+}
 // draw game field
 const drawField = () => {
   const field = pages.value[page.value].field
@@ -77,5 +83,6 @@ button:active {
 }
 .pages {
   display: flex;
+  align-items: center;
 }
 </style>
