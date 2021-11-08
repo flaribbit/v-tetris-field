@@ -3,7 +3,7 @@
     <canvas ref="canvas" />
   </div>
   <div>
-    <button v-for="page, i in pages" @click="selectpage = i">{{ i }}</button>
+    <button v-for="_, i in pages" @click="page = i">{{ i }}</button>
   </div>
 </template>
 
@@ -22,15 +22,16 @@ const colors = {
 }
 const props = defineProps({
   fumen: { type: String, default: "v115@vhAAgH" },
+  page: { type: Number, default: 0 },
 })
 // variables
 var ctx = null
 const canvas = ref(null)
 const pages = ref(decoder.decode(props.fumen));
-const selectpage = ref(0)
+const page = ref(props.page);
 // draw game field
 const drawField = () => {
-  const field = pages.value[selectpage.value].field
+  const field = pages.value[page.value].field
   for (var i = 0; i < 20; i++) {
     for (var j = 0; j < 10; j++) {
       var piece = field.at(j, i)
@@ -50,7 +51,7 @@ onMounted(() => {
   ctx = canvas.value.getContext("2d")
   drawField()
 })
-watch(selectpage, () => {
+watch(page, () => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
   drawField()
 })
