@@ -2,7 +2,7 @@
   <div>
     <canvas ref="canvas" />
   </div>
-  <div>
+  <div class="pages">
     <button v-for="_, i in pages" @click="page = i">{{ i }}</button>
   </div>
 </template>
@@ -56,3 +56,26 @@ watch(page, () => {
   drawField()
 })
 </script>
+
+<style scoped>
+button {
+  color: white;
+  font-size: 16px;
+  background-color: #66c65c;
+  border: none;
+  border-bottom: 4px solid #49b13e;
+  padding: 4px 12px;
+  margin-right: 8px;
+}
+button:hover {
+  background-color: #78cd6f;
+}
+button:active {
+  background-clip: padding-box;
+  border-top: 4px solid transparent;
+  border-bottom: none;
+}
+.pages {
+  display: flex;
+}
+</style>
