@@ -5,7 +5,7 @@
   <div class="pages">
     <TButton @click="setPage(page - 1)">上一页</TButton>
     <TButton @click="setPage(page + 1)">下一页</TButton>
-    {{ page }}
+    {{ page + 1 }}
   </div>
 </template>
 
@@ -31,16 +31,15 @@ const props = defineProps({
 // variables
 var ctx = null
 const canvas = ref(null)
-const pages = ref(decoder.decode(props.fumen));
-const page = ref(props.page);
+const pages = ref(decoder.decode(props.fumen))
+const page = ref(props.page)
 const setPage = (p) => {
-  if (p < 0 || p >= pages.value.length) return;
-  page.value = p;
+  if (p < 0 || p >= pages.value.length) return
+  page.value = p
 }
 // draw game field
 const drawField = () => {
   const field = pages.value[page.value].field
-  const mino = pages.value[page.value].mino()
   for (var i = 0; i < 20; i++) {
     for (var j = 0; j < 10; j++) {
       var piece = field.at(j, i)
@@ -52,6 +51,8 @@ const drawField = () => {
       }
     }
   }
+  if (!pages.value[page.value].operation) return
+  const mino = pages.value[page.value].mino()
   const pos = mino.positions()
   for (var i = 0; i < 4; i++) {
     ctx.fillStyle = colors[mino.type][0] + "7f"
