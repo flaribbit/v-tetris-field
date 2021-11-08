@@ -1,0 +1,20 @@
+name: Build demo
+on: [push, pull_request]
+jobs:
+  vite_build:
+    runs-on: ubuntu-latest
+    name: Vite build
+    steps:
+    - uses: actions/checkout@v2
+    - name: Vite build
+      shell: bash
+      run: |
+        npm install
+        npm run build ./test
+        cd test/dist
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+        git init
+        git add -A
+        git commit -m 'autobuild'
+        git push -f https://flaribbit:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git master:gh-pages
