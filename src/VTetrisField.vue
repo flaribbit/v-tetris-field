@@ -3,8 +3,8 @@
     <canvas ref="canvas" />
   </div>
   <div class="pages">
-    <button @click="setPage(page - 1)">上一页</button>
-    <button @click="setPage(page + 1)">下一页</button>
+    <TButton @click="setPage(page - 1)">上一页</TButton>
+    <TButton @click="setPage(page + 1)">下一页</TButton>
     {{ page }}
   </div>
 </template>
@@ -12,6 +12,7 @@
 <script setup>
 import { ref, watch, onMounted } from "vue"
 import { decoder } from "tetris-fumen"
+import TButton from "./TButton.vue"
 // color constants
 const colors = {
   "T": ["#b451ac", "#e56add"],
@@ -75,23 +76,6 @@ watch(page, () => {
 </script>
 
 <style scoped>
-button {
-  color: white;
-  font-size: 16px;
-  background-color: #66c65c;
-  border: none;
-  border-bottom: 4px solid #49b13e;
-  padding: 4px 12px;
-  margin-right: 8px;
-}
-button:hover {
-  background-color: #78cd6f;
-}
-button:active {
-  background-clip: padding-box;
-  border-top: 4px solid transparent;
-  border-bottom: none;
-}
 .pages {
   display: flex;
   align-items: center;

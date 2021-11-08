@@ -1,5 +1,5 @@
 <template>
-  <VTetrisField :fumen="fumen" :page="6" />
+  <VTetrisField :fumen="fumen" :page="0" />
 </template>
 
 <script setup>
