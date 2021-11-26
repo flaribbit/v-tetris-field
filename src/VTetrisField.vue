@@ -40,13 +40,17 @@ function drawField(ctx, page) {
   if (!page.operation) return
   const mino = page.mino()
   const pos = mino.positions()
+  ctx.lineWidth = 2
+  ctx.lineJoin = "round"
+  ctx.strokeStyle = colors[mino.type][0]
   for (var i = 0; i < 4; i++) {
-    ctx.fillStyle = colors[mino.type][0] + "7f"
-    ctx.fillRect(pos[i].x * 20, (height - pos[i].y) * 20, 20, 20)
-    if (!pos.find(p => p.x == pos[i].x && p.y == pos[i].y + 1) && field.at(pos[i].x, pos[i].y + 1) == "_") {
-      ctx.fillStyle = colors[mino.type][1] + "7f"
-      ctx.fillRect(pos[i].x * 20, (height - pos[i].y) * 20, 20, -4)
-    }
+    ctx.strokeRect(pos[i].x * 20 + 2, (height - pos[i].y) * 20 + 2, 16, 16)
+    // ctx.fillStyle = colors[mino.type][0] + "7f"
+    // ctx.fillRect(pos[i].x * 20, (height - pos[i].y) * 20, 20, 20)
+    // if (!pos.find(p => p.x == pos[i].x && p.y == pos[i].y + 1) && field.at(pos[i].x, pos[i].y + 1) == "_") {
+    //   ctx.fillStyle = colors[mino.type][1] + "7f"
+    //   ctx.fillRect(pos[i].x * 20, (height - pos[i].y) * 20, 20, -4)
+    // }
   }
 }
 onMounted(() => {
