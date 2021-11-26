@@ -16,7 +16,8 @@ const colors = {
   "X": ["#686868", "#949494"],
 }
 const props = defineProps({
-  page: null,
+  page: { type: Object, default: null },
+  height: { type: Number, default: 20 },
 })
 // variables
 var ctx = null
@@ -24,14 +25,15 @@ const canvas = ref(null)
 // draw game field
 function drawField(ctx, page) {
   const field = page.field
+  const height = props.height - 1
   for (var i = 0; i < 20; i++) {
     for (var j = 0; j < 10; j++) {
       var piece = field.at(j, i)
       if (piece != "_") {
         ctx.fillStyle = colors[piece][0]
-        ctx.fillRect(j * 20, (19 - i) * 20, 20, 20)
+        ctx.fillRect(j * 20, (height - i) * 20, 20, 20)
         ctx.fillStyle = colors[piece][1]
-        ctx.fillRect(j * 20, (19 - i) * 20, 20, -4)
+        ctx.fillRect(j * 20, (height - i) * 20, 20, -4)
       }
     }
   }
@@ -40,20 +42,21 @@ function drawField(ctx, page) {
   const pos = mino.positions()
   for (var i = 0; i < 4; i++) {
     ctx.fillStyle = colors[mino.type][0] + "7f"
-    ctx.fillRect(pos[i].x * 20, (19 - pos[i].y) * 20, 20, 20)
+    ctx.fillRect(pos[i].x * 20, (height - pos[i].y) * 20, 20, 20)
     if (!pos.find(p => p.x == pos[i].x && p.y == pos[i].y + 1) && field.at(pos[i].x, pos[i].y + 1) == "_") {
       ctx.fillStyle = colors[mino.type][1] + "7f"
-      ctx.fillRect(pos[i].x * 20, (19 - pos[i].y) * 20, 20, -4)
+      ctx.fillRect(pos[i].x * 20, (height - pos[i].y) * 20, 20, -4)
     }
   }
 }
 onMounted(() => {
   canvas.value.width = 10 * 20
-  canvas.value.height = 20 * 20
+  canvas.value.height = props.height * 20
   ctx = canvas.value.getContext("2d")
   drawField(ctx, props.page)
 })
 watch(props, () => {
+  ctx.canvas.height = props.height * 20
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
   drawField(ctx, props.page)
 })

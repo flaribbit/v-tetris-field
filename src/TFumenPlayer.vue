@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VTetrisField :page="pages[page]" />
+    <VTetrisField :page="pages[page]" :height="props.height" />
   </div>
   <div class="fumen-ctl">
     <TButton @click="setPage(page - 1)">上一页</TButton>
@@ -17,6 +17,7 @@ import VTetrisField from "./VTetrisField.vue"
 const props = defineProps({
   fumen: { type: String, default: "v115@vhAAgH" },
   page: { type: Number, default: 0 },
+  height: { type: Number, default: 20 },
 })
 const pages = ref(decoder.decode(props.fumen))
 const page = ref(props.page)
