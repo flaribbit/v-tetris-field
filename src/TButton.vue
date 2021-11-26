@@ -1,5 +1,5 @@
 <template>
-  <button @click="emit('click')">
+  <button class="vt-btn" @click="emit('click')">
     <slot />
   </button>
 </template>
@@ -8,8 +8,8 @@
 const emit = defineEmits(["click"])
 </script>
 
-<style scoped>
-button {
+<style>
+button.vt-btn {
   color: white;
   border: none;
   font-size: 16px;
@@ -18,10 +18,10 @@ button {
   padding: 4px 12px;
   margin-right: 8px;
 }
-button:hover {
+button.vt-btn:hover {
   background-color: #78cd6f;
 }
-button:active {
+button.vt-btn:active {
   background-clip: padding-box;
   border-top: 4px solid transparent;
   border-bottom: none;

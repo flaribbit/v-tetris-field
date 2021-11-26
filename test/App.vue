@@ -1,5 +1,7 @@
 <template>
+  <h2>TFumenPlayer</h2>
   <TFumenPlayer :fumen="fumen" :page="0" />
+  <h2>TFumenList</h2>
   <TFumenList :fumen="fumen" />
 </template>
 

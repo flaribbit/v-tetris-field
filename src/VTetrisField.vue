@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="canvas" />
+  <canvas class="vt-field" ref="canvas" />
 </template>
 
 <script setup>
@@ -50,7 +50,6 @@ function drawField(ctx, page) {
 onMounted(() => {
   canvas.value.width = 10 * 20
   canvas.value.height = 20 * 20
-  canvas.value.style = "image-rendering: pixelated"
   ctx = canvas.value.getContext("2d")
   drawField(ctx, props.page)
 })
@@ -59,3 +58,9 @@ watch(props, () => {
   drawField(ctx, props.page)
 })
 </script>
+
+<style>
+.vt-field {
+  image-rendering: pixelated;
+}
+</style>
