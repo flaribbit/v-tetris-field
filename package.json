@@ -10,5 +10,31 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.4",
     "vite": "^2.6.13"
+  },
+  "name": "v-tetris-field",
+  "description": "A vue3 component which draws tetris game field from fumen code.",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/flaribbit/v-tetris-field.git"
+  },
+  "keywords": [
+    "vue",
+    "tetris",
+    "vite",
+    "vue-component"
+  ],
+  "author": "flaribbit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flaribbit/v-tetris-field/issues"
+  },
+  "homepage": "https://github.com/flaribbit/v-tetris-field#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
