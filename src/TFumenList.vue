@@ -1,6 +1,9 @@
 <template>
   <div class="fumen-list">
-    <VTetrisField v-for="p of pages" :page="p" />
+    <div class="fumen-item" v-for="p,i in pages">
+      <VTetrisField :page="p" />
+      <div>({{ i + 1 }}) {{ p.comment }}</div>
+    </div>
   </div>
 </template>
 
