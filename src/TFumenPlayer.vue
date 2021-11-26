@@ -3,8 +3,10 @@
     <VTetrisField :page="pages[page]" :height="props.height" />
   </div>
   <div class="fumen-ctl">
-    <TButton @click="setPage(page - 1)">上一页</TButton>
-    <TButton @click="setPage(page + 1)">下一页</TButton>
+    <TButton @click="setPage(0)">|&lt;</TButton>
+    <TButton @click="setPage(page - 1)">&lt;</TButton>
+    <TButton @click="setPage(page + 1)">&gt;</TButton>
+    <TButton @click="setPage(pages.length - 1)">&gt;|</TButton>
     {{ page + 1 }}
   </div>
 </template>

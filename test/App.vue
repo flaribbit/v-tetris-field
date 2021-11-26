@@ -16,4 +16,12 @@ const fumen = "v115@vhPJHYaAkeEfEXoC+BlvlzByEEfE03k2AlP5ABwfAA?A+rQAAqsBsqBvtBTp
   background-color: #f3f3ed;
   border-radius: 4px;
 }
+@media (max-width: 420px) {
+  .fumen-item {
+    width: calc(50% - 4px);
+  }
+  .fumen-item .vt-field {
+    width: 100%;
+  }
+}
 </style>
