@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue"
 import { decoder } from "tetris-fumen"
 import VTetrisField from "./VTetrisField.vue"

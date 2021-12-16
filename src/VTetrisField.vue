@@ -2,8 +2,9 @@
   <canvas class="vt-field" ref="canvas" />
 </template>
 
-<script setup>
-import { ref, watch, onMounted } from "vue"
+<script setup lang="ts">
+import { ref, watch, onMounted, PropType } from "vue"
+import type { Page } from "tetris-fumen"
 // color constants
 const colors = {
   "T": ["#b451ac", "#e56add"],
@@ -14,16 +15,17 @@ const colors = {
   "S": ["#66c65c", "#88ee86"],
   "Z": ["#ef624d", "#ff9484"],
   "X": ["#686868", "#949494"],
+  "_": ["#686868", "#949494"],
 }
 const props = defineProps({
   page: { type: Object, default: null },
   height: { type: Number, default: 20 },
 })
 // variables
-var ctx = null
-const canvas = ref(null)
+var ctx: CanvasRenderingContext2D | null = null
+const canvas = ref<HTMLCanvasElement>()
 // draw game field
-function drawField(ctx, page) {
+function drawField(ctx: CanvasRenderingContext2D, page: Page) {
   const field = page.field
   const height = props.height - 1
   for (var i = 0; i < 20; i++) {
@@ -54,15 +56,18 @@ function drawField(ctx, page) {
   }
 }
 onMounted(() => {
+  if (!canvas.value) return
   canvas.value.width = 10 * 20
   canvas.value.height = props.height * 20
   ctx = canvas.value.getContext("2d")
-  drawField(ctx, props.page)
+  if (!ctx) return
+  drawField(ctx, props.page as Page)
 })
 watch(props, () => {
+  if (!ctx) return
   ctx.canvas.height = props.height * 20
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-  drawField(ctx, props.page)
+  drawField(ctx, props.page as Page)
 })
 </script>
 

@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue"
 import { decoder } from "tetris-fumen"
 import TButton from "./TButton.vue"
@@ -23,7 +23,7 @@ const props = defineProps({
 })
 const pages = ref(decoder.decode(props.fumen))
 const page = ref(props.page)
-const setPage = (p) => {
+const setPage = (p: number) => {
   if (p < 0 || p >= pages.value.length) return
   page.value = p
 }

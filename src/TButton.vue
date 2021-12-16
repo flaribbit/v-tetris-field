@@ -4,7 +4,7 @@
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const emit = defineEmits(["click"])
 </script>
 
